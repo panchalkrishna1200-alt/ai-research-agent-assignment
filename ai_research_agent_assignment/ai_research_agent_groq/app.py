@@ -3,6 +3,8 @@ import time
 from research import search_company, get_wikipedia_summary
 from analyzer import analyze_with_groq
 from report_generator import generate_markdown_report, generate_pdf_report
+import os
+api_key = st.secrets.get("GROQ_API_KEY", "")
 
 st.set_page_config(
     page_title="AI Research Agent",
