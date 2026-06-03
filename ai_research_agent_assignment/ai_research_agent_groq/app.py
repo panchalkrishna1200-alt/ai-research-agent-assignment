@@ -3,8 +3,7 @@ import time
 from research import search_company, get_wikipedia_summary
 from analyzer import analyze_with_groq
 from report_generator import generate_markdown_report, generate_pdf_report
-import os
-api_key = st.secrets.get("GROQ_API_KEY", "")
+
 
 st.set_page_config(
     page_title="AI Research Agent",
@@ -85,20 +84,16 @@ st.markdown("""
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("### 🔑 Groq API Key")
-    st.markdown('<div class="api-box">Get your <b>free</b> key at<br><a href="https://console.groq.com" target="_blank">console.groq.com</a></div>', unsafe_allow_html=True)
 
-    api_key = st.text_input(
-        "Enter Groq API Key",
-        type="password",
-        placeholder="gsk_...",
-        help="Free at console.groq.com — no credit card needed"
-    )
+    api_key = st.secrets.get("GROQ_API_KEY", "")
+
+    if api_key:
+        st.success("✅ API Key loaded from Streamlit Secrets")
 
     st.markdown("---")
     model_choice = st.selectbox(
         "🧠 Model",
-        ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "mixtral-8x7b-32768", "gemma2-9b-it"],
-        help="All free on Groq"
+        ["llama-3.3-70b-versatile", "llama-3.1-8b-instant", "mixtral-8x7b-32768", "gemma2-9b-it"]
     )
 
     st.markdown("---")
